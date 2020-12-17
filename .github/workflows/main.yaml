@@ -1,0 +1,43 @@
+name: build and tests
+on:
+  push:
+    branches:
+    - '*'
+  pull_request:
+    branches:
+    - 'master'
+
+jobs:
+  test_suite:
+    name: Pytest on ${{ matrix.python-version }}, ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ['ubuntu-latest']
+        python-version: [3.8]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+           activate-environment: nd213-system-monitor
+           environment-file: environment.yaml
+           python-version: ${{ matrix.python-version }}
+           auto-activate-base: false
+           auto-update-conda: false
+           channels: conda-forge
+
+      - name: conda config
+        shell: bash -l {0}
+        run: conda config --show
+
+      - name: conda list
+        shell: bash -l {0}
+        run: conda list
+
+      - name: build
+        shell: bash -l {0}
+        run: |
+          make build

@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+dependencies:
+  - gcc_linux-64
+  - cxx-compiler
+  - make
+  - cmake
