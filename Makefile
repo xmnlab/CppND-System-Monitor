@@ -1,12 +1,15 @@
 CC=${CONDA_PREFIX}/bin/x86_64-conda_cos6-linux-gnu-gcc
 CXX=${CONDA_PREFIX}/bin/x86_64-conda_cos6-linux-gnu-g++
 
+
 .PHONY: all
-all: format test build run
+all: format test build run build-and-run
+
 
 .PHONY: format
 format:
 	clang-format src/* include/* -i
+
 
 .PHONY: build
 build:
@@ -15,6 +18,7 @@ build:
 	cmake .. && \
 	make
 
+
 .PHONY: debug
 debug:
 	mkdir -p build
@@ -22,11 +26,17 @@ debug:
 	cmake -DCMAKE_BUILD_TYPE=debug .. && \
 	make
 
+
 .PHONY: clean
 clean:
 	rm -rf build
+
 
 .PHONY: run
 run:
 	cd build && \
 	./monitor
+
+
+.PHONY: build-and-run
+build-and-run: build run
