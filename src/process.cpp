@@ -48,12 +48,8 @@ long int Process::UpTime() { return LinuxParser::UpTime(); }
  * Overload the "less than" comparison operator for Process objects
  */
 bool Process::operator<(Process const& a) const {
-  freopen("/tmp/output.txt", "w", stderr);
-
   float lhs_cpu_usage = LinuxParser::CpuUtilization(Pid());
   float rhs_cpu_usage = LinuxParser::CpuUtilization(a.Pid());
-
-  std::cerr << "lhs: " << lhs_cpu_usage << " rhs: " << rhs_cpu_usage;
 
   return lhs_cpu_usage < rhs_cpu_usage;
 }

@@ -55,17 +55,19 @@ float Processor::Utilization() {
   std::ifstream filestream(LinuxParser::kProcDirectory +
                            LinuxParser::kStatFilename);
 
-  if (filestream.is_open()) {
-    while (std::getline(filestream, line)) {
-      std::istringstream linestream(line);
+  if (!filestream.is_open()) {
+    return 0.0;
+  }
 
-      linestream >> key >> usertime >> nicetime >> systemtime >> idletime >>
-          iowaittime >> irqtime >> softirqtime >> stealtime >> guesttime >>
-          guestnicetime;
+  while (std::getline(filestream, line)) {
+    std::istringstream linestream(line);
 
-      if (key == "cpu") {
-        break;
-      }
+    linestream >> key >> usertime >> nicetime >> systemtime >> idletime >>
+        iowaittime >> irqtime >> softirqtime >> stealtime >> guesttime >>
+        guestnicetime;
+
+    if (key == "cpu") {
+      break;
     }
   }
 
