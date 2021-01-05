@@ -20,6 +20,7 @@ using std::vector;
 Processor& System::Cpu() { return cpu_; }
 
 vector<Process>& System::Processes() {
+  this->processes_.clear();
   for (auto pid : LinuxParser::Pids()) {
     this->processes_.push_back(Process(pid));
   }

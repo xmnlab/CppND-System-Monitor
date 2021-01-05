@@ -1,7 +1,10 @@
 channels:
   - conda-forge
 dependencies:
-  - gcc_linux-64
+  - c-compiler
   - cxx-compiler
+  - clang
+  - clangdev
+  - gdb
   - make
   - cmake

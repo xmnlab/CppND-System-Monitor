@@ -305,18 +305,20 @@ long LinuxParser::UpTime(int pid) {
 
   std::ifstream filestream(LinuxParser::kProcDirectory + to_string(pid) +
                            LinuxParser::kStatFilename);
-
+  /*
   if (filestream.is_open()) {
     std::getline(filestream, line);
 
     std::istringstream linestream(line);
 
-    linestream >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >>
-        tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >>
-        tmp >> tmp >> starttime;
+    for (int i = 1; i < 21; ++i) {
+      linestream >> tmp;
+    }
+    linestream >> starttime;
 
     return starttime / sysconf(_SC_CLK_TCK);
   }
+  */
   return 0;
 }
 
@@ -343,12 +345,27 @@ float LinuxParser::CpuUtilization(int pid) {
 
     std::istringstream linestream(line);
 
-    linestream >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >> tmp >>
-        tmp >> tmp >> tmp >> tmp >> utime >> stime >> cutime >> cstime >> tmp >>
-        tmp >> tmp >> tmp >> starttime;
+    int system_uptime;
+
+    system_uptime = LinuxParser::UpTime();
+
+    for (int i=1; i<14; ++i) {
+      linestream >> tmp;
+    }
+
+    linestream >> utime;
+    linestream >> stime;
+    linestream >> cutime;
+    linestream >> cstime;
+
+    for (int i=17; i<22; ++i) {
+      linestream >> tmp;
+    }
+
+    linestream >> starttime;
 
     int hertz = sysconf(_SC_CLK_TCK);
-    int system_uptime = LinuxParser::UpTime();
+
 
     int total_time = utime + stime + cutime + cstime;
 
