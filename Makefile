@@ -20,16 +20,20 @@ format:
 build:
 	mkdir -p build && \
 	cd build && \
-	cmake .. && \
-	make
+	cmake -DCMAKE_BUILD_TYPE=Release -GNinja .. && \
+	ninja
+
+
+.PHONY: rebuild
+rebuild: clean build
 
 
 .PHONY: debug
 debug: clean
 	mkdir -p build
 	cd build && \
-	cmake -DCMAKE_BUILD_TYPE=Debug .. && \
-	make
+	cmake -DCMAKE_BUILD_TYPE=Debug -GNinja .. && \
+	ninja
 
 
 .PHONY: clean
@@ -48,6 +52,12 @@ build-and-run: build run
 
 
 .PHONY: debug-and-run
-debug-and-run: build
+debug-and-run: debug
 	cd build && \
 	gdb ./monitor
+
+
+.PHONY: run-tests
+run-tests: build
+	cd build && \
+	clang++ -O1 -fsanitize=address .; ./monitor

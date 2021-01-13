@@ -7,13 +7,16 @@ using std::string;
 using std::to_string;
 
 string Format::ElapsedTime(long seconds) {
-  string h = std::to_string(seconds / (60 * 60));
-  string m = std::to_string((seconds / 60) % 60);
-  string s = std::to_string(seconds % 60);
+  long h;
+  long d;
+  long m;
+  long s;
 
-  // as hour can be have more than 2 digits, it doesn't need to have extra 0
-  m.insert(m.begin(), 2 - m.length(), '0');
-  s.insert(s.begin(), 2 - s.length(), '0');
+  h = seconds / (60 * 60);
+  d = h / 24;
+  h = h % 24;
+  m = (seconds / 60) % 60;
+  s = seconds % 60;
 
-  return h + ':' + m + ':' + s;
+  return to_string(d) + "d" + to_string(h) + "h" + to_string(m) + "m";
 }
