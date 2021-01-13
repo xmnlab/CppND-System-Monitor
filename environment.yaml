@@ -2,11 +2,15 @@ channels:
   - conda-forge
 dependencies:
   - c-compiler
+  - compiler-rt
   - clang
   - clangdev
   - cmake
   - cxx-compiler
   - gdb
   - glog
+  - libclang-cpp
+  - llvm
+  - llvmdev
   - make
   - ninja

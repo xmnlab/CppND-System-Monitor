@@ -51,13 +51,11 @@ run:
 build-and-run: build run
 
 
+.PHONY: rebuild-and-run
+build-and-run: rebuild run
+
+
 .PHONY: debug-and-run
 debug-and-run: debug
 	cd build && \
 	gdb ./monitor
-
-
-.PHONY: run-tests
-run-tests: build
-	cd build && \
-	clang++ -O1 -fsanitize=address .; ./monitor
