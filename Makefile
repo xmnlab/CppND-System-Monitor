@@ -36,11 +36,6 @@ debug:
 	ninja
 
 
-.PHONY: clean
-clean:
-	rm -rf build
-
-
 .PHONY: run
 run:
 	cd build && \

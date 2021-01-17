@@ -1,10 +1,10 @@
 #ifndef SYSTEM_PARSER_H
 #define SYSTEM_PARSER_H
 
+#include <unistd.h>
 #include <fstream>
 #include <regex>
 #include <string>
-#include <unistd.h>
 
 namespace LinuxParser {
 // Paths
@@ -58,6 +58,6 @@ long int UpTime(int pid);
 // new
 const long HZ = sysconf(_SC_CLK_TCK);
 
-};  // namespace LinuxParser
+}; // namespace LinuxParser
 
 #endif
