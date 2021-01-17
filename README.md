@@ -29,27 +29,31 @@ Check the Makefile to see the other targets available.
 
 ## Instructions
 
+1. Clone the project repository: `git clone https://github.com/xmnlab/CppND-System-Monitor.git`
+
 1. All the dependencies can be installed using conda. If you don't have miniconda installed, you can download it
     from https://docs.conda.io/en/latest/miniconda.html.
 
-1. Install all the dependencies running the command (at the root of the project):
+1. Install all the dependencies running the command (at the root directory of the project):
    `conda env create -n nd213-system-monitor --file environment.yaml  --force`
 
 1. Now, in each new session that you want to build and run the monitor app, you need to activate the conda environment first:
    `conda activate nd213-system-monitor`
 
-1. Clone the project repository: `git clone https://github.com/udacity/CppND-System-Monitor-Project-Updated.git`
-
 1. Build the project: `make build`
 
-1. Run the resulting executable: `./build/monitor`
+1. Run the resulting executable with `./build/monitor`, or using `make run`
 ![Starting System Monitor](images/starting_monitor.png)
+
+
+## For Udacity project submission
 
 1. Follow along with the lesson.
 
 1. Implement the `System`, `Process`, and `Processor` classes, as well as functions within the `LinuxParser` namespace.
 
 1. Submit!
+
 
 ## Acknowledges
 
