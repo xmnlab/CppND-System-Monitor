@@ -29,7 +29,7 @@ rebuild: clean build
 
 
 .PHONY: debug
-debug: clean
+debug:
 	mkdir -p build
 	cd build && \
 	cmake -DCMAKE_BUILD_TYPE=Debug -GNinja .. && \
@@ -52,10 +52,10 @@ build-and-run: build run
 
 
 .PHONY: rebuild-and-run
-build-and-run: rebuild run
+rebuild-and-run: rebuild run
 
 
-.PHONY: debug-and-run
-debug-and-run: debug
+.PHONY: rebuild-and-debug
+rebuild-and-debug: clean debug
 	cd build && \
 	gdb ./monitor

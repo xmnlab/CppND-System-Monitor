@@ -5,11 +5,12 @@
 
 #include <cstdio>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 
 // for debugging
-#include <glog/logging.h>
+// #include <glog/logging.h>
 
 using std::stof;
 using std::string;
@@ -372,7 +373,7 @@ string LinuxParser::User(int pid) {
   string uid = LinuxParser::Uid(pid);
 
   string line;
-  string username = "";
+  string username = "      ";
   string _uid;
   string _x;
 
@@ -422,5 +423,5 @@ long LinuxParser::UpTime(int pid) {
   }
   linestream >> starttime;
 
-  return starttime / LinuxParser::HZ;
+  return LinuxParser::UpTime() - (starttime / LinuxParser::HZ);
 }

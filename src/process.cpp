@@ -11,7 +11,7 @@
 #include "linux_parser.h"
 
 // for debugging
-#include <glog/logging.h>
+// #include <glog/logging.h>
 
 using std::string;
 using std::to_string;
@@ -28,12 +28,10 @@ int Process::Pid() const {
 };
 
 void Process::UpdateCpuUtilization() {
-  long uptime = LinuxParser::UpTime(this->pid_);
-
-  long seconds = LinuxParser::UpTime() - uptime;
+  long proc_uptime = LinuxParser::UpTime(this->pid_);
   long totaltime = LinuxParser::ActiveJiffies(this->pid_);
 
-  this->utilization_ = float(totaltime) / float(seconds);
+  this->utilization_ = float(totaltime) / float(proc_uptime);
 }
 
 float Process::CpuUtilization() const {
